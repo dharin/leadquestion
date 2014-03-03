@@ -1,0 +1,120 @@
+<%= content_for(:head) do %>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			/* alert("doc load from federal planel"); */
+			$('#us_citizen').hide();
+			$("#affiliated").hide();
+			$("#military_affiliation").hide();
+			$("#branch").hide();
+			
+			
+			$('#interest_title4').change(function(){
+				$('#us_citizen').show('fast');
+			});
+			$('#interest_military').change(function(){
+				$('#military_affiliation').show('fast');
+			});
+			$('#affiliated').change(function(){
+				$('#military_affiliation').show('fast');
+			});
+			$('#military_affiliation').change(function(){
+				$('#branch').show('fast');
+			});
+			
+		});
+	</script>
+
+<% end %>
+
+<%= content_for(:right_column) do %>
+	<%= render '/shared/right_all_schools' %>
+<% end %>
+
+
+<%= content_for :left_column_main do %>
+
+	<div id="left_column_wrapper">
+		
+		<% unless flash[:notice].nil? %>
+			<div id="notice"><%= flash[:notice] %></div>
+		<% end %>
+		
+		<%= render "/shared/progress_bar" %>
+		
+		
+		<div id="picform_main" class="picform_federal_panel img-rounded">
+			<h2>Financial Aid</h2>
+			<%= simple_form_for @student,  url: wizard_path,  :html => { :class => 'form-horizontal' } do |f| %>
+	
+				<fieldset>
+					<%= f.input :financial_aid,
+						:label => "Are you interested in tuition assistance?",
+						:as => :radio_buttons,
+						:wrapper_html => {:id => 'interest_title4', :class => 'inline'}					
+						%>
+					<!-- 
+					<%= f.input :tuition_reimbursement,
+						:label => "Are you interested in tuition reimbursement?",
+						:as => :radio_buttons,
+						:wrapper_html => {:id => 'interest_reimbursement', :class => 'inline'}				
+						%>
+					-->
+					<%= f.input :military_tuition_assistance,
+						:label => "Are you interested in military tuition assistance or Veterans Educational Benefits?",
+						:as => :radio_buttons,
+						:wrapper_html => {:id => 'interest_military', :class => 'inline'}				
+						%>
+					
+					<%= f.input :us_citizen, 
+						:label => "Are you a U.S. citizen or a national or permanent resident of the U.S?", 
+						:as => :radio_buttons, 
+						:wrapper_html => {:id => 'us_citizen', :class => 'inline'}
+						%>
+					
+					<%= f.input :affiliated_with_us_military, 
+						:label => "Are you affiliated with the U.S. military?", 
+						:as => :radio_buttons, 
+						:wrapper_html => {:id => 'affiliated', :class => 'inline'}
+						%>
+				
+					<%= f.input :type_of_military_affiliation, 
+						:label => "Type of affiliation",
+						:as => :radio_buttons, 
+						:collection => 
+							[
+								["Veteran","Veteran"],
+								["Active Reserve or Nat.Guard","Active"], 
+								["Military Spouse", "MilitarySpouse"]
+							],
+						:wrapper_html => { :id => 'military_affiliation'} 
+						 %>
+					<%= f.input :branch_of_service, 
+						:label => "Branch of service",
+						:as => :radio_buttons, 
+						:collection => 
+							[
+								["Veteran","Veteran"],
+								["Active Duty", "Active Duty"], 
+								["National Guard", "National Guard"],
+								["Reserve (active)", "Reserve (active)"], 
+								["Reserve (inactive)", "Reserve (inactive)"], 
+								["Active Duty Spouse", "Active Duty Spouce"],
+								["Guard Spouse", "Guard Spouce"],
+								["Reserve Spouse", "Reserve Spouce"]
+							],
+						:wrapper_html => { :id => 'branch'} 
+						 %>
+	
+				  	<div class="form-actions" id="federal_submit">
+						<!-- <## link_to "Back", previous_wizard_path, :class => 'btn' #> -->
+						<%= f.submit 'Next', :class => 'btn-warning btn-large' %>
+				  	</div>
+				</fieldset>
+	
+			<% end %>
+		</div>
+	</div>
+
+<% end %>
+

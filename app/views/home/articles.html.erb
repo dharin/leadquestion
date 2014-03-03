@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p></p> 
+  <% lead = {'lead[username]'=>'username', 'lead[firstname]'=>'firstname', 'lead[lastname]' => 'lastname', 'lead[email]' => 'emel@yopmail.com', 'lead[source_url]' => request.original_url, 'lead[latitude]' => 75.10, 'lead[longitude]' => 23.80, 'lead[ipaddress]' => '127.0.0.1', 'lead[city]' => 'city', 'lead[state]' => 'state', 'lead[country]' => 'India', 'lead[zipcode]' => '123456', 'secret_key' => 'f4cc650a735ca9b699f0ac1bc7d70a4c' } %>
+
+
+  <p>
+    <%= link_to "Lead Post", lead_store_lead_url(lead), :method => 'POST', :title => "", :class => "btn btn-primary btn-lg" %>
+  </p>
+</div>

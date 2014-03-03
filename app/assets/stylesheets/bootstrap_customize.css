@@ -1,0 +1,43 @@
+/* override class defined in twitter bootstrap for submit buttons */
+.form-actions { padding:10px; margin-left: 90px!important;
+	border-radius:3px; }
+.form-actions input { margin-left:0px!important;}
+
+.uneditable-input {
+  color: gray; /*  line 797: was 555555 */
+}
+
+/* ———— to make the form narrower —————*/
+input, textarea {
+  width: 170px; /* line 802: was 210px */
+}
+
+select {
+  width: 180px; /* line 901: was 220 ------------------------ */
+}
+
+/* to reduce the amount of gutter space between the right-aligned field label and the input block for that field */
+.form-horizontal .controls {
+	margin-left:90px;	 /* line 1498; was 90 in lpmpf*/
+}
+.form-horizontal .control-label {
+	padding-top: 5px;  /* line 1491; line up bottom of topmost line of label to bottom of option within the select */
+}
+
+/* to make data entry form fields tall enough to contain text: Why am I having to change this?  
+	~ line 1401 and following of bootstrap.css */
+
+.form-horizontal input {
+	margin-top: 6px;
+	min-height: 24px;
+	padding-top: 2px;
+	min-width: 80px; /* was 180px for Request Info button on 0th panel of pic form */
+}
+
+/* to align submit-button with data entry fields in form */
+
+.form-horizontal .form-actions {
+  padding-left: 00px; /* line 1511: was 160px  */
+  margin-left: 0px;  /* added to align left edge of white block containing submit button with input fields above */
+}
+ /* line 1476 controls vertical spacing between form's fields */

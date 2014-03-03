@@ -1,0 +1,11 @@
+<h1>Enter Your Type </h1>
+<%= render layout: 'form' do |f| %>
+  <div class="field">
+  <%= f.label :question_type %>
+  <% if f.object.answer_options.to_s == "2" %>
+    <%= f.select :question_type_id, QuestionType.option2.all(&:name).map{ |form| [form.name, form.id ]} %>
+  <% else %>
+    <%= f.select :question_type_id, QuestionType.option2plus.all(&:name).map{ |form| [form.name, form.id ]} %>
+  <% end %>    
+  </div>
+<% end %>

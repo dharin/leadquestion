@@ -1,0 +1,168 @@
+/* a change */
+.nothing { color:red; }
+
+@import "color_scheme";
+
+
+/* ———— layout divs/sections ————————————————————————— */
+body {
+  color:#000;
+  font-family:'Helvetica Neue',helvetica,sans-serif;
+  line-height:1.4em;
+}
+
+/* or, change the extension on css file from .css.scss to .css.scss.erb, and then use
+	background-image:url(<#=asset_path "header-bg-06-brown-jpg" %>);
+*/
+/* use BOOTSTRAP 'container' class instead
+div#outer_wrapper {
+	width:1020px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:30px;
+		
+}
+*/
+div.container { 
+	background-color: $container-background-color;
+	padding-left:20px; 
+	padding-right:0px; 
+}
+
+/* ————— main nav at top of the page ————————————— */
+	
+div#main_nav { 
+	margin-left:320px; margin-right:40px; 
+	background-color:transparent;	
+}
+
+
+/* ————— hero images at top of the page ————————————— */
+
+div#hero { 
+	position:relative; top:0; left:0;
+	width:940px; /* Bootstrap .span12 -20 on left */
+	min-height:200px;  /* push content down to allow background image to appear */ 
+	overflow: hidden; /* so if hero image is larger than div#hero */
+	margin-bottom:10px;
+	} 
+div#hero_overlay_text p.tag_line {color:$page-subtitle-color;}	
+
+div.hero_quote { 
+	position: relative; top:140px; left:80px;
+	height: 130px;
+	width:380px;
+	padding:10px;
+	display:block; 
+}
+div.hero_quote p.quote {
+	font-style: italic;
+	font-size: 16px;
+}
+div.hero_quote p.attribution {
+	font-size:10px; 
+	font-family: Arial; 
+	font-style:normal;
+}
+div#shd_branding {
+	position:relative; top:0px; left:100px;
+	color:blue;
+}
+
+
+/* ———— within left column ——————————————————————————— */
+
+#left_column_wrapper { 
+	padding: 0px;
+	background-color: $left-column-background-color;
+} 
+#left_column_wrapper h1 { margin-bottom: 10px;}
+#left_column_wrapper .image_wrapper { margin-bottom:30px; margin-top:20px; }
+
+
+/* ———— within right column —————————————————————————— */
+
+/* css related to the picform that goes in the right 
+column is in the separate file picform.css */
+
+#authorize p { color:blue; }
+
+#right_column_wrapper { 
+	background-color: $right-column-background-color;
+	color: $right-column-text-color;
+	width: 320px!important;
+	border-radius:6px;
+	padding-top:20px;
+	padding-bottom:20px;
+	padding-left:20px;
+	padding-right:20px;
+	margin-top:60px;
+	z-index: 3;
+	}
+	
+#right_column_wrapper h2 {
+	font-size:24px; 
+	color:$right-column-text-color; 
+	}
+/* not used in layouts where picform does not float up/down
+
+a.skip_this_text { color: red; }
+
+*/	
+/* ———— within footer ———————————————————————————————— */	
+
+div#footer { 
+	margin-top:40px; 
+	height: 80px; 
+	background-color: $footer-background-color;
+	}
+div.modal_overlay_links { margin-top:20px; padding-left:20px; }	
+div.modal_overlay_links a { color:$footer-text-link-color; }
+	
+/* ———— on the landing page ————————————————————————— */
+
+div#student_title {
+	background-color: $landing-page-title-background-color;
+	}
+div#student_title h3 { 
+	color: $landing-page-title-color;
+	font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; /* not finding this font */	
+	font-size: 40px;
+	padding: 15px 0px 15px 20px;
+	/*box-shadow: 10px 10px 5px #888; */
+	}
+
+
+div#objections h2 {
+    /* font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; */
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: -0.8px;
+	margin-left:20px;
+	}
+div#objections p.features {    
+	color: $text-color-in-highlighted-text-block;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.6;
+	padding: 0 20px 20px 20px;
+	}
+
+div#objections div#smiley {
+	background-color: $text-block-highlight-color;		
+	}
+.highlight_white { 
+	color: $highlighted-text-color-in-highlighted-text-block;
+	font-weight:bold; 
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	

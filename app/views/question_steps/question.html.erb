@@ -1,0 +1,19 @@
+<h1>Enter Your Question </h1>
+
+<%= render layout: 'form' do |f| %>
+
+  <div class="field">
+    <%= f.label :form %>
+    <%= f.select :form_id, Form.all(&:name).map{ |form| [form.name, form.id ]} %>
+  </div>
+  <div class="field">
+    <%= f.label :question_name %>
+    <%= f.text_field :question_name %>
+  </div>
+  <div class="field">
+    <%= f.label :answer_options %>
+    <%= f.radio_button(:answer_options, '2') %> 2 Options <br>
+    <%= f.radio_button(:answer_options, '2+') %> More than 2 Options
+  </div>
+
+<% end %>

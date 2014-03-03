@@ -1,0 +1,746 @@
+<!--
+<div class="jumbotron">
+  <h1>Welcome!</h1>
+  <p></p>
+  <p>
+    <%#= link_to "Main Page", root_path, :class => "btn btn-primary btn-lg" %>
+  </p>
+</div>
+-->
+<!-- 
+  DEBUG: 11/22 added :input_html => { :tabindex => "x" } in an attempt to let people move through the form fields by hitting enter and having the cursor move to the next field.  But if you hit enter after, e.g., completing the first field, it seems to treat it as a submit: or at least it gives an error.  
+  It does not place the cursor over the first field when the page comes up.
+  Nor does it move through the fields going from one to the next. 
+-->
+<%= content_for(:head) do %>
+  <!-- 
+  <link href='http://fonts.googleapis.com/css?family=Hammersmith+One' rel='stylesheet' type='text/css'> 
+  -->
+  <script type="text/javascript">
+    jQuery(document).ready(function(){      
+      // FORM VALIDATION
+      $(".simple_form").validate();
+
+      // SELECT LOGIC - START
+      var edu_level        = $("#edu_level select");
+      var edu_level_opt    = $("#edu_level select option");
+      var degree_level     = $("#degree_level select");
+      var degree_level_opt = $("#degree_level select option");  
+      var area_level     = $("#area_of_study select");
+      var area_level_opt = $("#area_of_study select option");  
+      
+      // Dropdown Status
+      var degreeFunc = function(status){
+        var t1 = $("#degree_level").parent();
+        var t2 = $("#degree_level select");
+        if (status === "enable") { t1.removeClass("inactive");  t2.removeAttr("disabled","disabled"); }
+        if (status === "disable"){ t1.addClass("inactive");     t2.attr("disabled","disabled"); }
+      }
+      var areaFunc = function(status){
+        var t1 = $("#area_of_study").parent();
+        var t2 = $("#area_of_study select");
+        if (status === "enable") { t1.removeClass("inactive");  t2.removeAttr("disabled","disabled"); }
+        if (status === "disable"){ t1.addClass("inactive");     t2.attr("disabled","disabled"); }
+      }
+      degreeFunc("disable");
+      areaFunc("disable");
+
+      // Populate Degrees
+      var populateDegrees = function(arg){
+        var temp = degree_level_opt;
+        degree_level_opt.remove();
+        for (var i=0; i < arg.length; i++){ degree_level.append(temp[arg[i]]); }
+      }
+      
+      // Education Event
+      edu_level.change(function(){
+        var edu_text  = $("#edu_level select option:selected").text();
+        var edu_label = $("#edu_level select option").eq(0).text();
+        var deg_text  = $("#degree_level select option:selected").text();        
+        var hs  = $("#dialog-hs");        
+        var t1  = "Still in High School";
+        var t2  = "GED";
+        var t3  = "High School Diploma";
+        var t4  = "Some College (less than two years)";
+        var t5  = "Some College (more than two years)";
+        var t6  = "Associate's Degree";
+        var t7  = "Bachelor's Degree";
+        var t8  = "Master's Degree";
+        var t9  = "Doctoral Degree";
+
+        if (edu_text === t1){
+          hs.fadeIn(600);
+          hs.find(".mini-no").click(function(){ $("#edu_level option:eq(0)").prop("selected",true);  hs.fadeOut(200); });
+          hs.find(".mini-yes").click(function(){ 
+            hs.find(".mini-one").fadeOut(200);
+            hs.find(".mini-two").fadeIn(200);
+            setTimeout(function(){
+              // High School Redirect  -->  StraighterLine                      
+              window.location = "http://Straighterline.7eer.net/c/48364/72639/1322"; }, 3000);
+          });
+        }
+        if (edu_text === t2 || edu_text === t3 || edu_text === t4 || edu_text === t5 || edu_text === t6){
+          populateDegrees([0,1,2]);
+          degreeFunc("enable");
+        }
+        if (edu_text === t7){
+          populateDegrees([0,2,3]);
+          degreeFunc("enable");
+        }
+        if (edu_text === t8 || edu_text === t9){
+          populateDegrees([0,2,3,4]);
+          degreeFunc("enable");
+        }
+        if (deg_text !== "What degree is next for you?"){ areaFunc("enable");  } 
+        if (edu_text === edu_label){ degreeFunc("disable"); areaFunc("disable"); }                
+
+      });
+      
+      // Degree Event
+      degree_level.change(function(){
+        var doc      = $("#dialog-doc");              
+        var deg_text = $("#degree_level select option:selected").text();
+        if (deg_text !== "What degree is next for you?"){ areaFunc("enable");  } 
+        if (deg_text === "What degree is next for you?"){ areaFunc("disable"); }
+        if (deg_text === "Doctoral"){
+          doc.fadeIn(600);
+          doc.find(".mini-no").click(function(){ $("#degree_level option:eq(0)").prop("selected",true);  doc.fadeOut(200); });
+          doc.find(".mini-yes").click(function(){ 
+            doc.find(".mini-one").fadeOut(200);
+            doc.find(".mini-two").fadeIn(200);
+            setTimeout(function(){
+              // Doctoral Redirect  -->  Agg                      
+              window.location = "/aggregators"; }, 3000);
+          });
+        }
+      });      
+    
+      // Area Event
+      area_level.change(function(){
+        var mas       = $("#dialog-mas");        
+        var deg_text  = $("#degree_level select option:selected").text();
+        var area_text = $("#area_of_study select option:selected").text();                             
+        if (deg_text === "Master's"){
+          if (area_text !== "Area of Study" && area_text !== "Business" && area_text !== "Criminal Justice" && area_text !== "Education"){
+            mas.fadeIn(600);
+            mas.find(".mini-no").click(function(){ $("#area_of_study option:eq(0)").prop("selected",true);  mas.fadeOut(200); });
+            mas.find(".mini-yes").click(function(){ 
+              mas.find(".mini-one").fadeOut(200);
+              mas.find(".mini-two").fadeIn(200);
+              setTimeout(function(){
+                // Masters Redirect  -->  Agg                      
+                window.location = "/aggregators"; }, 3000);
+            });
+          }
+        }
+      });      
+      // SELECT LOGIC - END
+      
+    });
+  </script>
+
+  
+  <style type="text/css"> 
+  
+    /* flash  ————————————————— */
+    div#flash { 
+      position: relative; top:-550px; left:640px; 
+      padding-top:0px; padding-bottom:10px; 
+      width:300px!important;
+      font-weight:normal;
+      }
+    .text-info { color: red!important;} 
+    
+    /* hero image ——————————————*/
+    /* want image a minimum of 480px high; min 560px wide; max 830px wide. Not currently doing this. */
+    /* #hero_image { height:480px; width:830px; } */
+    /* and Firefox images to 480px high to accomodate Sitelock image in the form 
+       also make background on form white or 80% opaque; it will sit above some of the larger hero images. Maybe make background on the Find Schools Here orange arrow semi-transparent also.
+       Also adjust vertical position of the orange arrow; if images are taller, it will pull down 
+       on the page so that it no longer lines up with the Start Search button on the form.
+       If do this, then also close up text headers below image so there is less vertical white space
+    */
+
+    #hero_row .span4 { margin-left:0px; } /* overrides bootstrap 20px for all spans  span4 is 300px */
+    
+    
+    /* pic form, panel 0 ———————*/  
+    
+    div#picform { padding-top:40px; }
+    .form_action {padding-top:0px; margin-top:0px;}
+    /* reduce vertical spacing between form fields */
+    form.simple_form fieldset div.control_group { margin-bottom:45px;} 
+    /* reduce spacing between last input and submit button */
+    form.simple_form fieldset div.form_actions { padding-top:0px; padding-bottom:0px; margin-bottom:0px; } 
+    div#degree_level { margin-top:20px;}
+    div#area_of_study {margin-top:20px;}
+  
+    /* row #3: overcoming objection row ——————————————— */
+      /* see below, within the text; can that be moved up here? */
+    div.features { font-size:12px; padding: 0 20px 0 20px;}
+    div.features p.accent { color:blue!important; font-weight:bold!important; }
+    div.features p span.accent { color:blue!important; font-weight:bold!important; } /* Not working. Why? */
+    /* for validates plug-in */
+    label.error { float:none; color:red; padding-left: 8px; vertical-align: top; padding-top:2px;}    
+  </style>
+  
+    
+<% end %>
+
+
+<%= content_for(:head) do %>
+  
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    /* alert("Document Ready event raised in Federal Panel"); */
+    $('#us_citizen').hide();  
+    $('#affiliated').hide();
+    $('#military_affiliation').hide();
+    $('#branch').hide();
+    $('#employer_name').hide();
+    
+    //$("input#student_financial_aid_true").click(function(){
+      $("#interest_title4 input:first").click(function(){
+      $('#us_citizen').show();  
+    });
+$("#interest_title4 input:last").click(function(){
+      $('#us_citizen').hide();  
+    });
+
+    $("input#student_tuition_reimbursement_true").click(function(){
+      $('#employer_name').show('fast');     
+    }); 
+    $("input#student_tuition_reimbursement_false").click(function(){
+      $('#employer_name').hide();     
+    });
+    
+    $("#interest_reimbursement input:first").click(function(){
+      $('#employer_name').show('fast');     
+    }); 
+    $("#interest_reimbursement input:last").click(function(){
+      $('#employer_name').hide();     
+    });
+    
+
+    
+
+    /*
+    $('#interest_reimbursement').change(function(){   
+    var x = $("#interest_reimbursement").val(); 
+        if (x == 'Yes') {}
+    */
+    
+  
+
+    /* modify this to indent the question to show that it is logically dependent on this one ) */
+    // $("input#student_military_tuition_assistance_true").click(function(){
+      $("#interest_military input:first").click(function(){
+      $('#affiliated').show('fast');  
+    });
+            $("#interest_military input:last").click(function(){
+      $('#affiliated').hide('fast');  
+    });
+
+
+//    $("input#student_military_tuition_assistance_false").click(function(){
+  //    $('#affiliated').hide('fast');  
+    //});
+  
+    $("input#student_affiliated_with_us_military_true").click(function(){
+      $('#military_affiliation').show('fast');
+      $('#branch').show('fast');  
+    });
+    $("input#student_affiliated_with_us_military_false").click(function(){
+      $('#military_affiliation').hide('fast');
+      $('#branch').hide('fast');  
+    });
+    
+    /* A bit fancier UI:  do not show branch-of-service question if answer chosen for Q45: military affiliation is 'None' 
+    $('#military_affiliation').change(function(){
+      $('#branch').show('fast');
+    });
+    */
+
+
+  /* Form Valiation */
+  if ( $(".simple_form").length == 1 ) { $(".simple_form").validate(); }
+
+
+  /* Radio Error Fix */
+  
+  error = '<label class="radio-error">This field is required.</label>';
+  $(".form-actions").click(function(){
+    $(".radio-error").remove();
+    setTimeout(function(){
+      $(".radio label.error").remove();
+      $(".radio input.error").parent().parent().prepend(error);
+    }, 10);
+  });       
+  
+  $("input").click(function(){     /* Removes Existing Error */
+    setTimeout(function(){ 
+      $(".radio_buttons.valid").parent().prev().prev().remove();    
+    }, 10);
+  });
+  
+  /* END adio Error Fix */
+  
+});
+</script>
+
+<% end %>
+
+
+<%= content_for(:student_main) do %>
+
+  <!-- High School Dialog ————————————————————————————————  -->
+  <div id="dialog-hs" class="mini-dialog" style="display:none;">
+    <div class="mini-one">
+      <h1>You Selected "Still in High School"</h1>
+      <p>Please verify if this is correct:</p>
+      <input type="button" class="mini-yes" value="Yes">
+      <input type="button" class="mini-no" value="No">
+      <p class="mini-terms">By clicking "Yes" I understand I will be redirected to a site that will best help me.<br>First course is FREE with purchase of a monthly subscription. Hurry, offer expires soon!</p>
+    </div>
+    <div class="mini-two" style="display:none;">
+      <h1>You are being redirected...</h1>
+    </div>
+  </div>
+
+  
+  <!-- Doctoral Dialog ————————————————————————————————  -->
+  <div id="dialog-doc" class="mini-dialog" style="display:none;">
+    <div class="mini-one">
+      <h1>You Selected "Doctoral"</h1>
+      <p>Please verify if this is correct:</p>
+      <input type="button" class="mini-yes" value="Yes">
+      <input type="button" class="mini-no" value="No">
+      <p class="mini-terms">By clicking "Yes" I understand I will be shown schools that best suit me.</p>
+    </div>
+    <div class="mini-two" style="display:none;">
+      <h1>Searching Available Programs...</h1>
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Masters Dialog ————————————————————————————————  -->
+  <div id="dialog-mas" class="mini-dialog" style="display:none;">
+    <div class="mini-one">
+      <h1>You Selected "Master's"</h1>
+      <p>Please verify if this is correct:</p>
+      <input type="button" class="mini-yes" value="Yes">
+      <input type="button" class="mini-no" value="No">
+      <p class="mini-terms">By clicking "Yes" I understand I will be shown schools that best suit me.</p>
+    </div>
+    <div class="mini-two" style="display:none;">
+      <h1>Searching Available Programs...</h1>
+      <div class="progress progress-striped active">
+        <div class="bar" style="width: 100%;"></div>
+      </div>      
+    </div>
+  </div>
+
+
+  <!-- row #0: title bar —————————————————————————————————  -->
+  <div class="row-fluid nav">
+    <div class="span3">
+      <a href="/"><%= image_tag "logo.png", :title => "DegreeCouncil", :class => "logo" %></a>
+    </div>
+    <div class="span9">
+      <!-- <span class="h3">Find The Right School For You</span> -->
+      <ul>
+        <li>Call Us<br><em>(855) 216-0165</em></li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- row #1: hero image, PIC form —————————————————————————————————  -->
+  
+  <div class="row hero" id="hero_row" style="background: #f3f3eb url(../assets/hero/hero1.jpg) no-repeat bottom; margin: 0;">
+    <!-- hero image —————————————————————————————————— -->  
+    <div class="span12" id="student_title"> 
+      <span class="h1"><%#= @aoi.hero_title %></span>
+      <span class="h2"><%#= @aoi.tagline %></span>
+    
+      <style type="text/css">
+        #text_overlay { position:relative; top:-136px; z-index:10; }
+        #text_overlay h2 { font-size:40px; padding-left:140px; padding-top:10px; font-family: Helvetica; color:white; z-index:12; margin-top: -90px;}
+        #text_overlay img { margin-top: -22px; z-index:11; }
+      </style>              
+      <div id="hero_image"></div>                  
+    </div>
+    <div class="span4"> 
+      <style type="text/css">
+        div#AOS {margin-bottom:20px;}
+        div#edu_level { margin-bottom:20px;}
+        div#q_in_school { margin-bottom:20px;}
+        form#new_student fieldset { margin-left:20px; padding-right:10px;}
+        .btn-mine { font-weight: bold; width:200px; }     
+      </style>
+        <div id="picform_panel_0">
+          <%= simple_form_for @form_data, :url => {:controller=>"form_datas", :action=>"create"}, :method => "POST" do |f| %>
+            <%= f.simple_fields_for :form_datas do |p| %>
+              <div id ="form_1">
+                <div class="yellow">
+                  <%= p.input "answer[1]", :label => false, :collection => [
+                      ["Still in High School", "Still in High School" ],  ["GED", "GED" ], ["High School Diploma", "High School Diploma" ],  
+                      ["Some College (less than two years)", "Some College (less than two years)" ], ["Some College (more than two years)", "Some College (more than two years)" ],
+                      ["Associate's Degree", "Associate's Degree" ], ["Bachelor's Degree", "Bachelor's Degree" ],  
+                      # ["Post-Graduate Study", 7 ],   
+                      ["Master's Degree", "Master's Degree" ], ["Doctoral Degree", "Doctoral Degree" ],    
+                      #   ["Nursing Diploma", 10 ]  # or between 5,6? 
+                      ],
+                      :prompt => "Highest level of education so far", :wrapper_html => { :id => 'edu_level'},
+                      :required => true %>
+                </div>
+                <div class="yellow">
+                  <%= p.input "answer[2]", :label => false, :wrapper_html => { :id => 'degree_level'}, :collection => [ 
+                    ["Associate's","Associate's"], ["Bachelor's","Bachelor's"], ["Master's","Master's"], ["Doctoral","Doctoral"] ],  
+                  :prompt => 'What degree is next for you?', :input_html => { :id => 'degrees_select'},
+                  :required => true %>
+                </div>
+                <div class="yellow">
+                  <%= p.input "answer[3]", :wrapper_html => { :id => 'area_of_study'},:label => false,
+                    :collection =>  [ ["Business","Business"], ["Criminal Justice","Criminal Justice"], 
+                    ["Education","Education"], ["Engineering & Science", "Engineering & Science"], ["Fire & Emergency Mgmt", "Fire & Emergency Mgmt"],
+                    ["Healthcare","Healthcare"], ["Information Technology","Information Technology"], ["Legal/Paralegal Studies","Legal/Paralegal Studies"],  
+                    ["Liberal Arts","Liberal Arts"], ["Nursing","Nursing"], ["Psychology & Counseling", "Psychology & Counseling"],   
+                    ["Social Services","Social Services"], ["Web/Graphic Design","Web/Graphic Design"], ["Theology","Theology"]
+                  ], :prompt => "Area of Study", :input_html => { :id => 'disciplines_select' }, :required => true %>
+                </div>
+                <br><%= link_to "Next", "javascript:void(0)", :onclick => "showhide1()", :class => "btn-large btn-warning" %> 
+                <script type="text/javascript">
+                  function showhide1(){
+                    v1 = $("#edu_level select option:selected").text();
+                    v2 = $("#degree_level select option:selected").text();
+                    v3 = $("#area_of_study select option:selected").text();
+                    // Area of Study
+                    if(v1 == 'Highest level of education so far'){
+                      $("#edu_level div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#edu_level div").append("This field is required.")
+                    }else if(v2 == 'What degree is next for you?'){
+                      $("#edu_level div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#degree_level div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#degree_level div").append("This field is required.")
+                    }else if(v3 == 'Area of Study'){
+                      $("#degree_level div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#area_of_study div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#area_of_study div").append("This field is required.")
+                    }else{
+                      $("#form_1").hide();
+                      $("#form_2").show();
+                      $("#form_3").hide();
+                      $("#form_4").hide();
+                      $("#form_5").hide();
+                    }
+                  }
+                </script>
+              </div>
+              <div id ="form_2" style="display:none;">
+                <h2>Education</h2>
+                <div class="yellow">
+                  <%= p.input 'answer[4]', :label => false, :prompt => "Area of Concentration", 
+                  :collection =>[ ["Accounting", "Accounting"], ["Business Administration", "Business Administration"] ,["Banking Service", "Banking Service"], 
+                    ["Business", "Business"], ["Customer Service", "Customer Service"], ["Event Planning", "Event Planning"],
+                    ["Food/Hotel Management", "Food/Hotel Management"],["Health Club Operations", "Health Club Operations"], ["Information Processing", "Information Processing"],
+                    ["Office Management", "Office Management"], ["Sales","Sales"], ["Small Business Management", "Small Business Management"]
+                  ], :wrapper_html => { :id => 'area_of_concentration'}, :required => true %>
+                </div>
+                <div class="yellow">
+                  <%= p.input 'answer[5]', :label => false, :prompt => "Classroom Experience Wanted",     
+                    :collection => [ ["Online","Online"], ["Campus","Campus"], ["Both","Both"] ], 
+                    :input_html => { :tabindex => '3' }, :wrapper_html => { :id => 'classroom_experience_wanted'}, :required => true %> 
+                </div>
+                <div class="yellow">
+                  <% yearlist = 1980..2013
+                     yeararray = []
+                     yearlist.each do |year|
+                      yeararray.push year
+                     end
+                    yeararray_reverse = yeararray.reverse
+                  %>
+                  <%= p.input 'answer[6]', :prompt => 'Year graduated from high school',  :collection => yeararray_reverse, 
+                    :wrapper_html => { :id => 'edu_year_graduated_from_high_school' },
+                    :label => false, :required => true %> 
+                </div>
+                <br><%= link_to "Next", "javascript:void(0)", :onclick => "showhide2()", :class => "btn-large btn-warning" %> 
+                <script type="text/javascript">
+                  function showhide2(){
+                    v11 = $("#area_of_concentration select option:selected").text();
+                    v21 = $("#classroom_experience_wanted select option:selected").text();
+                    v31 = $("#edu_year_graduated_from_high_school select option:selected").text();
+                    if(v11 == 'Area of Concentration'){
+                      $("#area_of_concentration div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                      $("#area_of_concentration div").append("This field is required.")
+                    }else if(v21 == 'Classroom Experience Wanted'){
+                    $("#area_of_concentration div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                    $("#classroom_experience_wanted div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                    $("#classroom_experience_wanted div").append("This field is required.")
+                  }else if(v31 == 'Year graduated from high school'){
+                    $("#classroom_experience_wanted div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                    $("#edu_year_graduated_from_high_school div.controls").contents().filter(function(){ return this.nodeType != 1; }).remove()
+                    $("#edu_year_graduated_from_high_school div").append("This field is required.")
+                  }else{
+                    $("#form_1").hide();
+                    $("#form_2").hide();
+                    $("#form_3").show();
+                    $("#form_4").hide();
+                    $("#form_5").hide();
+                  }
+                }
+              </script>
+
+             </div>
+             <div id ="form_3"  style="display:none;">
+              <div id="picform_main" class="picform_federal_panel img-rounded">
+              <h2>Financial Aid</h2>
+                <%= p.input 'answer[7]',
+              :label => "Are you interested in Federal Financial Aid?",
+              :as => :radio_buttons, 
+              :inner_html => { :id => 'student_financial_aid_true'} ,            
+              :wrapper_html => {:id => 'interest_title4', :class => 'inline'},
+              :required => true         
+            %>
+
+            <br><br>
+            <%= p.input 'answer[8]', 
+              #:label => "Are you a U.S. Citizen or a National or Permanent Resident of the U.S?", 
+              :label => "Are you a Citizen of the United States?", # the GCU wording
+              :collection => [["Yes",1],["No",0]],
+              :as => :radio_buttons,
+              :default=> "Yes", # :default "Yes" did not work
+              #:item_wrapper_class => 'inline',
+              :wrapper_html => {:id => 'us_citizen', :class => 'inline'},
+              :required => true
+            %>
+ <br><br>
+ <%= p.input 'answer[9]',
+              :label => "Are you interested in Military Tuition Assistance or Veterans Educational Benefits?",
+              :as => :radio_buttons,
+              :required => true,
+              :wrapper_html => {:id => 'interest_military', :class => 'inline'}       
+            %>
+
+
+<br><br>
+<%= p.input 'answer[11]', 
+              :label => "Are you affiliated with the U.S. military?", 
+              :as => :radio_buttons, 
+              :wrapper_html => {:id => 'affiliated', :class => 'inline'}
+            %>
+
+  <br><br>
+            <%#= p.input 'answer[12]', 
+              :label => "Branch of service",
+              :collection => 
+                [   
+                  ["Army",0],
+                  ["Navy", 1], 
+                  ["Air Force", 2],
+                  ["Marines", 3], 
+                  ["Coast Guard", 4], 
+                  ["DoD", 5],
+                  ["None",6]
+                ],
+              :prompt => "Select One",
+              :wrapper_html => { :id => 'branch'} 
+            %>
+            <%= p.input 'answer[12]',
+              #:label => "Are you interested in Employer Tuition Reimbursement?",
+              :label =>'Are you employed by a company that offers Tuition Reimbursement?',
+              :as => :radio_buttons,
+              :wrapper_html => {:id => 'interest_reimbursement', :class => 'inline'}        
+            %>
+            <%= p.input 'answer[13]',
+              :label => "Employer",
+              :placeholder => "Company Name", 
+              :wrapper_html => {:id => 'employer_name'},
+              :input_html => { :maxlength => 25,:style => 'width:200px'}        
+            %>
+
+              <br><br>
+
+              <%= link_to "Next", "javascript:void(0)", :onclick => "showhide3()", :class => "btn-large btn-warning" %> 
+
+                <script type="text/javascript">
+                function showhide3(){
+                  $("#form_1").hide();
+                  $("#form_2").hide();
+                  $("#form_4").show();
+                  $("#form_3").hide();
+                  $("#form_5").hide();
+                }
+              </script>
+ </div>
+             </div>
+
+
+            
+
+
+               <div id ="form_4"  style="display:none;">
+                <%= p.input 'answer[14]', 
+          :placeholder => "First Name", :label => false,
+                      :required => true %>
+
+          <!-- question 2: required by all schools -->
+          <%= p.input 'answer[15]', :required => true,
+            :placeholder => "Last Name", :label => false,
+            :required => true %>
+        
+            <!-- question 3: required by all schools -->
+            <%= p.input 'answer[16]',  :placeholder => "Street", :label => false, :required => true  %>
+
+            <%= p.input 'answer[17]' , :placeholder => 'Zip code', :label => false, :input_html => { :id => "zip_code", :maxlength => 5 }, :required => true  %>  
+<br><%= link_to "Next", "javascript:void(0)", :onclick => "showhide4()", :class => "btn-large btn-warning" %> 
+                <script type="text/javascript">
+                function showhide4(){
+                  $("#form_1").hide();
+                  $("#form_2").hide();
+                  $("#form_3").hide();
+                  $("#form_4").hide();
+                  $("#form_5").show();
+                }
+              </script>
+
+             </div> 
+             <div id="form_5" style="display:none;">
+  <h2>Contact Info</h2>
+
+
+<%= p.input 'answer[18]',         
+            :placeholder => "Email", :label => false,
+            :required => false
+           %>
+
+           <%= p.input 'answer[19]', :as => :tel, :label => "Primary Phone", :input_html => { :class => "us_phone_number" }, :placeholder => "Primary Phone", :required => true, :label => false  %>
+          
+            <%= p.input 'answer[20]', :collection => [
+               "8:00 AM",
+               "9:00 AM",
+              "10:00 AM",
+              "11:00 AM",
+              "12:00 PM",
+               "1:00 PM",
+               "2:00 PM",
+                 "3:00 PM",
+               "4:00 PM",
+               "5:00 PM",
+               "6:00 PM",
+               "7:00 PM",
+               "8:00 PM",
+               "9:00 PM",
+              "10:00 PM"
+              ], 
+              :wrapper_html => { :id => 'btc'},
+              :prompt => "Best Time To Call", :label => false,
+                :required => true 
+            %>
+
+   <% end %>
+                <%= f.submit "         Start Search         ", :class => 'btn btn-warning btn-mine green-button' %>
+
+             </div>
+
+
+
+
+
+
+
+            <% end %>
+          </div>
+        
+        </div> <!-- end picform-panel-0 -->
+      <!-- </div> end pic-form-wrapper -->
+    </div> <!-- end span4 -->
+  </div> <!-- end row -->
+  
+  
+  <div class="orange-bar">
+    <div class="recently-matched">Recently Matched</div>
+    <ul>
+      <li class="kaplan"><%= image_tag "small_kaplan.jpg" %></li>
+      <li class="everst"><%= image_tag "small_everst.jpg" %></li>
+      <li class="gcu"><%= image_tag "small_gcu.jpg" %></li> 
+      <li class="devry" style="position: relative; bottom: 2px;"><a href="http://anthem.requestinfo.org/?cid=247" target="_blank"><%= image_tag "small_anthem.jpg" %></a></li>
+      <li class="grantham" style="margin: 0;"><%= image_tag "small_grantham.jpg" %></li>            
+    </ul>
+  </div>
+  <div class="row grey-bar">
+    <div class="span12"><h1>
+      <%#= @aoi.name %> 
+      </h1></div>
+  </div>
+  <!-- row #2: Facebook / Twitter / Assurance Marks —————————————————  -->
+
+  <!-- insert row for flash messages here for 'hloe inadequate for degree sought' error  -->
+  
+  <!-- flash msgs ————————————————————————————————— -->   
+  <!-- <div id="flash" class="row" >
+    <div class="span4">     
+    </div>
+  </div> -->
+  
+  <!--
+  <div class="row" id="assurance_marks">
+    <div class="span7"> 
+      <div class="fb-like" data-href="https://www.facebook.com/Degreecouncil" data-send="false"  data-show-faces="false" data-font="arial">
+      </div>
+      <div style="clear:both"></div>  
+    </div>    
+    <div class="span5">
+    </div>
+  
+  </div>
+  -->
+  
+  <!-- row #3: per-AOI text blocks  —————————————————  -->
+
+  <div class="row"> <!-- why this id? used to be 'overcome objections' -->
+
+    <div class="span9" >
+      <!-- images have been removed for now:
+        (1) can't get Twitter Bootstrap <i> element to find images
+        (2) at least the small Twitter Bootstrap images would not be very good here
+        <#= image_tag "icon_40x40.png", :width => "20px"  #>
+       -->
+      <h2><%#= @aoi.title_1 %></h2>
+      <p><%#= raw(@aoi.description_block_1) %></p>
+    </div>
+  
+    <div class="span9" id="smiley">
+      <h2><%#= @aoi.title_2 %></h2>
+      <p><%#= @aoi.description_block_2.html_safe %><p>
+    </div>
+  
+  
+    <div class="span9">
+      <h2><%#= @aoi.title_3 %></h2>
+      <p><%#= @aoi.description_block_3.html_safe %></p>
+    </div>
+    
+  </div> <!-- end row #3 -->
+  
+  
+  <div class="row"> <!-- unused row; in this layout the picform is tied to right span4 in the hero row -->
+    
+    <!-- put the stuff that floats up over the banner image here so that it does not put vertical space below the image and above the facebook row 
+      may not work if the classes 'row' and 'span8' have clearing goodies in them 
+    -->   
+    <!-- arrow ————————————————————————————— -->
+    <div class="span8"></div>
+    
+    <!-- PIC form, panel-0 ————————————————————————————— -->
+    <div class="span4"></div>
+  </div>
+  
+<% end %> 
+
+
+<%= content_for(:js_before_close_of_body) do %>
+    
+<% end %> 

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DegreeCouncil</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= yield :head %> 
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <script src="/assets/modals.js?body=1" type="text/javascript"></script>
+    <div id="outer_wrapper">
+      <div class="container">   
+        <div id="main">
+          <%= yield %>
+          <%= yield :student_main %>  
+        </div>
+        <div class="row">
+          <div class="span9"><h2></h2><p></p></div>
+          <div class="span9" id="smiley"><h2></h2><p></p><p></p></div>
+          <div class="span9"><h2></h2><p></p></div>
+        </div>
+        <div class="row">
+          <div class="span8"></div>
+          <div class="span4"></div>
+        </div>
+        <div id="footer">
+          <div class="modal_overlay_links">
+            <a data-toggle="modal" href="#aboutUs" ,="" class="btn btn-link">About Us</a>
+            <a data-toggle="modal" href="#contactUs" ,="" class="btn btn-link">Contact Us</a>
+            <a data-toggle="modal" href="#privacyPolicy" ,="" class="btn btn-link">Privacy Policy</a>
+            <% if controller.controller_name == "home" && controller.action_name == "home" %>
+            <a href="/question_steps/question" ,="" class="btn btn-link">Create Question</a>
+            <% end %>
+
+            <span>Copyright © 2013 Sand Hill Digital LLC. All rights reserved</span>
+          </div>
+        </div>
+        <div id="aboutUs" class="modal hide fade" aria-hidden="true" style="display: none;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 style="padding-left:20px;">About Us</h2>
+          </div>
+          <div class="modal-body" style="padding:20px;">
+            <div style="padding:10px 20px 20px 20px;">
+              <style>
+                .dc { color:black; font-weight:bold;}
+              </style>
+              <p><span class="dc">DegreeCouncil.org</span> provides breaking news and reference material to help prospective students make solid decisions in this difficult economy. A thoughtful person – whether a fresh high school graduate, a first-time college student, or a mid-career professional – cannot jump into a degree program without being informed about current job demand, and job demand in the foreseeable future. According to the US Bureau of Labor Statistics (BLS), college graduates earn an average of 40% more money than those without a college education. Perhaps more startling is that people without a college degree are twice as likely to be unemployed than those with a college degree.</p>
+              <p><span class="dc">DegreeCouncil.org</span>, featuring “Answer Center” and daily updated career and degree news, empowers first-time students or those in mid-career, to make informed decisions that will lead to future job security, and hopefully, a successful, balanced life.</p>
+              <p>Furthermore, <span class="dc">DegreeCouncil.org</span> works directly with online colleges and universities and “on campus” schools, to ensure that all study programs and information are up-to-date – and that prospects who fill out the request for information will usually find out within 24 hours which schools and programs are just right for their schedules. Real school advisors will call prospective students and walk them through the whole process.</p>
+              <p>If you don’t find the answers you’re looking for on <span class="dc">DegreeCouncil.org</span>, please contact us at contact@sandhilldigital.com and we’ll have one of our team members get all your questions answered by email or phone (whichever you prefer).</p>
+              <p>Request Information <a href="mailto:info@sandhilldigital.com?subject=information%20Request">Now</a>, or <a href="http://degreecouncil.org">Browse</a> the site to find your area of interest, or plug a keyword into our search box to quickly present relevant articles.</p>
+            </div>
+          </div>  
+          <div class="modal-footer"><a href="#" class="btn">Close</a></div>
+        </div>
+        <div id="privacyPolicy" class="modal hide fade">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2 style="padding-left:20px;">Privacy Policy</h2>
+          </div>
+          <div class="modal-body" style="padding:20px;">
+            <div style="padding:10px 20px 20px 20px;">
+              <p><i>Last Updated June 22, 2012</i></p>
+              <p>SandHill Digital LLC (“we,” “us,” or “our”) is a marketing optimization technology company. We have created this privacy policy (this “Platform Privacy Policy”) to inform you how our proprietary platform (the “Platform”) gathers, uses, and processes information on behalf of online marketers, website owners, leading brands, and other businesses that use our services (collectively, our “Clients”).</p>
+              <h4>The Information We Collect</h4>
+              <p>In the course of operating the Platform and providing our services, SandHill Digital LLC does (or does if applicable) not collect any personally identifiable information (“PII”). However, we do collect the following types of information (collectively, the “Information”).</p>
+              <ol>
+                <li>Information from Your Activity. Information that we or our technology providers may automatically collect when you visit, access, and/or use our Clients’ websites (the “Websites”), include your IP address; referring URL; time stamp; browser type and language; operating system; screen height; screen width; color depth; whether your computer is Java enabled; Internet connection type; whether or not your browser accepts cookies; pages viewed on the Websites; products viewed, placed in the cart, and purchased on the Websites; quantity, price, and purchase ID of products placed in cart and/or purchased on the Websites; and custom page data, as defined by our Clients.</li>
+                <li>Inferred Information. Based on the Information we collect from your Website activity, search terms entered through your browser, and information gleaned from previous cookies, we may infer other information, such as zip code, country, state, time zone, weather, temperature, heat index, wind chill, or proximity to a shipping location.</li>
+                <li>From Cookies and JavaScript Tags. We collect Information using “cookie” technology and JavaScript tags. Cookies are small packets of data that a website stores on your computer’s hard drive so that your computer will “remember” information about your visit. We may use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your computer until you delete them) to help us collect Information and to enhance your experience using the Websites. If you do not want us to place a cookie on your hard drive, you may be able to turn that feature off on your computer. Please consult your Internet browser’s documentation for information on how to do this and how to delete persistent cookies. However, if you decide not to accept cookies from us, the Websites may not function properly. We use JavaScript tags to trigger a sequence of events that includes viewing a first-party cookie (or setting that cookie if it does not already exist) and to help us and our Clients tailor, analyze, manage, report, and optimize your experience on the Websites.</li>
+              </ol>
+              <h4>How We Use and Share the Information</h4>
+              <p>SandHill Digital LLC uses and shares the Information only as follows.</p>
+              <ul> 
+                <li>We will access, use, and share the Information as required to fulfill our contractual obligations to our Clients or subsequent requests for service and/or support by our Clients.</li>
+                <li>Our technical staff may require periodic access to Information to monitor system performance and network capacity, test and fix systems, and develop and implement upgrades to systems.</li>
+                <li>We may employ other companies and individuals to perform functions on our behalf. Examples may include providing technical assistance and customer service. These other companies will have access to the Information only as necessary to perform their functions and to the extent permitted by law.</li>
+                <li>In an ongoing effort to better understand visitors to the Websites, the Platform, and our products and services, we may analyze the Information in aggregate form in order to operate, maintain, manage, and improve the Platform and/or our products and services. This aggregate information does not identify you personally.</li>
+              </ul>
+              <p>We may share some or all of this aggregate information with any of our parent companies, subsidiaries, joint ventures, or other companies under common control with us.</p>
+              <p>As we develop our businesses, we might sell or buy businesses or assets. In the event of a corporate sale, merger, reorganization, sale of assets, dissolution, or similar event, the Information may be part of the transferred assets.</p>
+              <p>To the extent permitted by law, we may also disclose the Information: (i) when required by law, court order, or other government or law enforcement authority or regulatory agency; or (ii) whenever we believe that disclosing such Information is necessary or advisable, for example, to protect the rights, property, or safety of SandHill Digital LLC or others.</p>
+              <h4>Accessing and Modifying Information and Communication Preferences</h4>
+              <p>If you would like to opt-out of SandHill Digital LLC’s collection of Information about you using cookies or JavaScript tags, please follow the instructions found on our Clients’ Websites. We will use commercially reasonable efforts to process such requests in a timely manner.</p>
+              <h4>How We Protect the Information</h4>
+              <p>We take commercially reasonable steps to protect the Information from loss, misuse, and unauthorized access, disclosure, alteration, or destruction. Please understand, however, that no security system is impenetrable. We cannot guarantee the security of our databases, nor can we guarantee that the Information that you supply will not be intercepted while being transmitted to and from us over the Internet.</p>
+              <h4>Important Notices to Non-U.S. Residents/Safe Harbor Certification</h4>
+              <p>SandHill Digital LLC complies with the U.S.-EU Safe Harbor Framework and the U.S.-Swiss Safe Harbor Framework as set forth by the U.S. Department of Commerce regarding the collection, use, and retention of personal information from European Union member countries and Switzerland. SandHill Digital LLC has certified that it adheres to the Safe Harbor Privacy Principles of notice, choice, onward transfer, security, data integrity, access, and enforcement.</p>
+              <p>However, it is important to note that the Platform and its servers are operated in the United States. If you are located outside of the United States, please be aware that any Information we gather will be transferred to the United States. By using the Websites, you consent to this transfer and our use of the Information in accordance with this Platform Privacy Policy.</p>
+              <p>In order to comply with the Safe Harbor framework, SandHill Digital LLC commits to the resolution of complaints about your privacy and our collection or use of your Information. We have also committed to resolve any complaints by European Union citizens relating to this Platform Privacy Policy, which cannot be resolved directly with our company, through the Council of Better Business Bureaus, Inc.’s Safe Harbor Privacy Dispute Resolution Procedures.</p>
+              <p>If you have any questions regarding this Platform Privacy Policy, please contact us as described in the “How to Contact Us” section below. We will investigate your question, respond to your inquiry, and attempt to resolve any concerns regarding your privacy question. If you do not receive acknowledgement of your complaint or if your complaint is not satisfactorily addressed by SandHill Digital LLC please visit the BBB EU SAFE HARBOR web site at www.bbb.org/us/safe-harbor-complaints for more information and to file a complaint.</p>
+              <h4>Changes to This Platform Privacy Policy</h4>
+              <p>This Platform Privacy Policy is effective as of the date stated at the top of this Platform Privacy Policy. We may change this Platform Privacy Policy from time to time. By accessing and/or using the Websites after we make any such changes to this Platform Privacy Policy, you are deemed to have accepted such changes. Please be aware that, to the extent permitted by applicable law, our use of the Information is governed by the Platform Privacy Policy in effect at the time we collect the Information. Please refer back to this Platform Privacy Policy on a regular basis.</p>
+              <h4>How to Contact Us</h4>
+              <p>If you have questions about this Platform Privacy Policy, please contact SandHill Digital LLC via e-mail at info@sandhilldigital.com with “PRIVACY POLICY” in the subject line or at the contact information on our Contact Us page.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn">Close</a>
+          </div>
+        </div>
+        <div id="contactUs" class="modal hide fade">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h2 style="padding-left:20px;">Contact Us</h2>
+                </div>
+                <div class="modal-body" style="padding:20px;">
+                  <div style="padding:10px 20px 20px 20px;">
+<p>You may contact us by sending email to <a href="mailto:info@degreecouncil.org">info@degreecouncil.org</a></p>
+</div>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" class="btn">Close</a>
+                </div>
+              </div>
+
+            </div>
+      
+    </div>    
+    
+    <!-- footer ——————————————————————————————————————  -->
+          
+  
+    
+    
+    <!-- modal displays ———————————————————————————————————— -->
+      
+    <div id="aboutUs" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 style="padding-left:20px;">About Us</h2>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <div style="padding:10px 20px 20px 20px;">
+  <style>
+    .dc { color:black; font-weight:bold;}
+  </style>
+  <p><span class="dc">DegreeCouncil.org</span> provides breaking news and reference material to help prospective students make solid decisions in this difficult economy. A thoughtful person – whether a fresh high school graduate, a first-time college student, or a mid-career professional – cannot jump into a degree program without being informed about current job demand, and job demand in the foreseeable future. According to the US Bureau of Labor Statistics (BLS), college graduates earn an average of 40% more money than those without a college education. Perhaps more startling is that people without a college degree are twice as likely to be unemployed than those with a college degree.</p>
+
+<p><span class="dc">DegreeCouncil.org</span>, featuring “Answer Center” and daily updated career and degree news, empowers first-time students or those in mid-career, to make informed decisions that will lead to future job security, and hopefully, a successful, balanced life.</p>
+
+<p>Furthermore, <span class="dc">DegreeCouncil.org</span> works directly with online colleges and universities and “on campus” schools, to ensure that all study programs and information are up-to-date – and that prospects who fill out the request for information will usually find out within 24 hours which schools and programs are just right for their schedules. Real school advisors will call prospective students and walk them through the whole process.</p>
+
+<p>If you don’t find the answers you’re looking for on <span class="dc">DegreeCouncil.org</span>, please contact us at contact@sandhilldigital.com and we’ll have one of our team members get all your questions answered by email or phone (whichever you prefer).</p>
+
+<p>Request Information <a href="mailto:info@sandhilldigital.com?subject=information%20Request">Now</a>, or <a href="http://degreecouncil.org">Browse</a> the site to find your area of interest, or plug a keyword into our search box to quickly present relevant articles.</p>
+</div>
+      </div>  
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+      </div>    
+    </div>
+    
+    <div id="privacyPolicy" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 style="padding-left:20px;">Privacy Policy</h2>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <div style="padding:10px 20px 20px 20px;">
+  <p><i>Last Updated June 22, 2012</i></p>
+  <p>SandHill Digital LLC (“we,” “us,” or “our”) is a marketing optimization technology company. We have created this privacy policy (this “Platform Privacy Policy”) to inform you how our proprietary platform (the “Platform”) gathers, uses, and processes information on behalf of online marketers, website owners, leading brands, and other businesses that use our services (collectively, our “Clients”).</p>
+
+  <h4>The Information We Collect</h4>
+  <p>In the course of operating the Platform and providing our services, SandHill Digital LLC does (or does if applicable) not collect any personally identifiable information (“PII”). However, we do collect the following types of information (collectively, the “Information”).</p>
+  <ol>
+    <li>Information from Your Activity. Information that we or our technology providers may automatically collect when you visit, access, and/or use our Clients’ websites (the “Websites”), include your IP address; referring URL; time stamp; browser type and language; operating system; screen height; screen width; color depth; whether your computer is Java enabled; Internet connection type; whether or not your browser accepts cookies; pages viewed on the Websites; products viewed, placed in the cart, and purchased on the Websites; quantity, price, and purchase ID of products placed in cart and/or purchased on the Websites; and custom page data, as defined by our Clients.</li>
+    <li>Inferred Information. Based on the Information we collect from your Website activity, search terms entered through your browser, and information gleaned from previous cookies, we may infer other information, such as zip code, country, state, time zone, weather, temperature, heat index, wind chill, or proximity to a shipping location.</li>
+    <li>From Cookies and JavaScript Tags. We collect Information using “cookie” technology and JavaScript tags. Cookies are small packets of data that a website stores on your computer’s hard drive so that your computer will “remember” information about your visit. We may use both session cookies (which expire once you close your web browser) and persistent cookies (which stay on your computer until you delete them) to help us collect Information and to enhance your experience using the Websites. If you do not want us to place a cookie on your hard drive, you may be able to turn that feature off on your computer. Please consult your Internet browser’s documentation for information on how to do this and how to delete persistent cookies. However, if you decide not to accept cookies from us, the Websites may not function properly. We use JavaScript tags to trigger a sequence of events that includes viewing a first-party cookie (or setting that cookie if it does not already exist) and to help us and our Clients tailor, analyze, manage, report, and optimize your experience on the Websites.</li>
+  </ol>
+
+  <h4>How We Use and Share the Information</h4>
+  <p>SandHill Digital LLC uses and shares the Information only as follows.</p>
+  <ul> 
+    <li>We will access, use, and share the Information as required to fulfill our contractual obligations to our Clients or subsequent requests for service and/or support by our Clients.</li>
+    <li>Our technical staff may require periodic access to Information to monitor system performance and network capacity, test and fix systems, and develop and implement upgrades to systems.</li>
+    <li>We may employ other companies and individuals to perform functions on our behalf. Examples may include providing technical assistance and customer service. These other companies will have access to the Information only as necessary to perform their functions and to the extent permitted by law.</li>
+    <li>In an ongoing effort to better understand visitors to the Websites, the Platform, and our products and services, we may analyze the Information in aggregate form in order to operate, maintain, manage, and improve the Platform and/or our products and services. This aggregate information does not identify you personally.</li>
+  </ul>
+  <p>We may share some or all of this aggregate information with any of our parent companies, subsidiaries, joint ventures, or other companies under common control with us.</p>
+  <p>As we develop our businesses, we might sell or buy businesses or assets. In the event of a corporate sale, merger, reorganization, sale of assets, dissolution, or similar event, the Information may be part of the transferred assets.</p>
+  <p>To the extent permitted by law, we may also disclose the Information: (i) when required by law, court order, or other government or law enforcement authority or regulatory agency; or (ii) whenever we believe that disclosing such Information is necessary or advisable, for example, to protect the rights, property, or safety of SandHill Digital LLC or others.</p>
+  <h4>Accessing and Modifying Information and Communication Preferences</h4>
+  <p>If you would like to opt-out of SandHill Digital LLC’s collection of Information about you using cookies or JavaScript tags, please follow the instructions found on our Clients’ Websites. We will use commercially reasonable efforts to process such requests in a timely manner.</p>
+
+  <h4>How We Protect the Information</h4>
+  <p>We take commercially reasonable steps to protect the Information from loss, misuse, and unauthorized access, disclosure, alteration, or destruction. Please understand, however, that no security system is impenetrable. We cannot guarantee the security of our databases, nor can we guarantee that the Information that you supply will not be intercepted while being transmitted to and from us over the Internet.</p>
+
+  <h4>Important Notices to Non-U.S. Residents/Safe Harbor Certification</h4>
+  <p>SandHill Digital LLC complies with the U.S.-EU Safe Harbor Framework and the U.S.-Swiss Safe Harbor Framework as set forth by the U.S. Department of Commerce regarding the collection, use, and retention of personal information from European Union member countries and Switzerland. SandHill Digital LLC has certified that it adheres to the Safe Harbor Privacy Principles of notice, choice, onward transfer, security, data integrity, access, and enforcement.</p>
+  <p>However, it is important to note that the Platform and its servers are operated in the United States. If you are located outside of the United States, please be aware that any Information we gather will be transferred to the United States. By using the Websites, you consent to this transfer and our use of the Information in accordance with this Platform Privacy Policy.</p>
+  <p>In order to comply with the Safe Harbor framework, SandHill Digital LLC commits to the resolution of complaints about your privacy and our collection or use of your Information. We have also committed to resolve any complaints by European Union citizens relating to this Platform Privacy Policy, which cannot be resolved directly with our company, through the Council of Better Business Bureaus, Inc.’s Safe Harbor Privacy Dispute Resolution Procedures.</p>
+  <p>If you have any questions regarding this Platform Privacy Policy, please contact us as described in the “How to Contact Us” section below. We will investigate your question, respond to your inquiry, and attempt to resolve any concerns regarding your privacy question. If you do not receive acknowledgement of your complaint or if your complaint is not satisfactorily addressed by SandHill Digital LLC please visit the BBB EU SAFE HARBOR web site at www.bbb.org/us/safe-harbor-complaints for more information and to file a complaint.</p>
+
+  <h4>Changes to This Platform Privacy Policy</h4>
+  <p>This Platform Privacy Policy is effective as of the date stated at the top of this Platform Privacy Policy. We may change this Platform Privacy Policy from time to time. By accessing and/or using the Websites after we make any such changes to this Platform Privacy Policy, you are deemed to have accepted such changes. Please be aware that, to the extent permitted by applicable law, our use of the Information is governed by the Platform Privacy Policy in effect at the time we collect the Information. Please refer back to this Platform Privacy Policy on a regular basis.</p>
+
+  <h4>How to Contact Us</h4>
+  <p>If you have questions about this Platform Privacy Policy, please contact SandHill Digital LLC via e-mail at info@sandhilldigital.com with “PRIVACY POLICY” in the subject line or at the contact information on our Contact Us page.</p>
+  
+</div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+      </div>
+    </div>
+    
+    <div id="privacyPolicyKaplan" class="modal hide fade">
+      
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 style="padding-left:20px;">Kaplan Privacy Policy</h2>
+      </div>    
+      <div class="modal-body" style="padding:20px;">
+        [ Text of Kaplan Privacy Policy goes here.  Not provided in Posting Docs.  Copy from their site? ]
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+      </div>
+    </div>
+    
+    <div id="contactUs" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h2 style="padding-left:20px;">Contact Us</h2>
+      </div>
+      <div class="modal-body" style="padding:20px;">
+        <div style="padding:10px 20px 20px 20px;">
+<p>You may contact us by sending email to <a href="mailto:info@degreecouncil.org">info@degreecouncil.org</a></p>
+</div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+      </div>
+    </div>
+
+    
+ 
+
+
+</body>
+
+
+</html>
+
+

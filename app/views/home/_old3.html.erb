@@ -1,0 +1,91 @@
+<%= simple_form_for @student, :validate => true do |f| %>
+            <fieldset>  
+            
+              <% unless flash[:notice].nil? %>
+                <div id ="notice" class="text-info"><%= flash[:notice] %></div>
+              <% end %>
+              <% unless flash[:warning].nil? %>
+                <div id ="alert" class="text-info"><%= flash[:warning] %></div>
+              <% end %>
+              <% unless flash[:alert].nil? %>
+                <div id ="alert" class="text-info"><%= flash[:alert] %></div>
+              <% end %>
+            
+            <div class="yellow">
+            
+            
+            
+            <%= f.input :highest_level_of_education, 
+                # :label => "What is your highest level of</br>education so far?",
+                :label => false,
+                :collection => 
+                  [
+                    ["Still in High School", 0 ], 
+                    ["GED", 1 ],        
+                    ["High School Diploma", 2 ],  
+                    ["Some College (less than two years)", 3 ], 
+                    ["Some College (more than two years)", 4 ],
+                    ["Associate's Degree", 5 ],   
+                    ["Bachelor's Degree", 6 ],  
+                    # ["Post-Graduate Study", 7 ],   
+                    ["Master's Degree", 8 ],    
+                    ["Doctoral Degree", 9 ],    
+                    # ["Nursing Diploma", 10 ]  # or between 5,6? 
+                  
+                  ],
+                :prompt => "Highest level of
+                  education so far",
+                :wrapper_html => { :id => 'edu_level'},
+                :required => true
+               %></div>
+          
+              <!-- prepop this with a choice consistent with the user's selected hloe; show alert if he changes it to something that won't work? -->
+              <div class="yellow"><%= f.input :degree_sought,
+               :label => false,
+                :wrapper_html => { :id => 'degree_level'},
+                :collection =>
+                  [ 
+                    ["Associate's","1"],
+                    ["Bachelor's","2"],
+                    ["Master's","3"],
+                    ["Doctoral","4"]
+                    #["Professional Certificate","5"]
+                  ],  
+                :prompt => 'What degree is next for you?',
+                :input_html => { :id => 'degrees_select'},
+                :required => true 
+              %></div>
+
+              <!--- Area of Study ( Discipline ) —————————— -->
+              <div class="yellow"><%= f.input :area_of_study, 
+                # :label => "Area of Study",
+                :wrapper_html => { :id => 'area_of_study'},
+                :label => false,
+                :collection =>
+                  [
+                    ["Business",1], 
+                    ["Criminal Justice",2], 
+                    ["Education",3],    
+                    ["Engineering & Science", 4], 
+                    ["Fire & Emergency Mgmt", 5],
+                    # ["Environment",6],        
+                    ["Healthcare",7], 
+                    ["Information Technology",8], # or CS/IT  
+                    ["Legal/Paralegal Studies",9],  
+                    ["Liberal Arts",10],  
+                    ["Nursing",11],
+                    ["Psychology & Counseling", 12],   
+                    ["Social Services",13],
+                    ["Web/Graphic Design",14],
+                    ["Theology",15]
+                    
+                  ],
+                :prompt => "Area of Study",
+                :input_html => { :id => 'disciplines_select' },
+                :required => true           
+              %></div>
+          
+            <%= f.submit "         Start Search         ", :class => 'btn btn-warning btn-mine green-button' %>
+            <!-- this will go to Student#create -->
+            </fieldset>
+          <% end %> <!-- end simple_form do block -->

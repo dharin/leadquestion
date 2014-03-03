@@ -1,0 +1,68 @@
+
+
+
+/* override class defined in twitter bootstrap for submit buttons 
+.form-actions { padding:10px; margin-left: 90px!important;
+	border-radius:3px; }
+.form-actions input { margin-left:0px!important;}
+*/
+.uneditable-input {
+  color: gray; /*  line 797: was 555555 */
+}
+
+/* ———— to make the form narrower —————*/
+input, textarea {
+  width: 170px; /* line 802: was 210px */
+}
+
+select {
+  width: 180px; /* line 901: was 220 ------------------------ */
+}
+/* to make label and data entry field fit in narrower space than bootstrap default */
+.form-horizontal .control-label { width:100px; } /* bootstrap.css (2.1.1) line 1794 */ 
+.form-horizontal .controls { margin-left: 50px;} /* bootstrap.css line 1801 */
+
+/* to line up bottom of topmost line of label to bottom of option within the select; see line ~ 1491 of bootstrap.css */
+.form-horizontal .control-label { padding-top: 6px; }  /* 5px for drop-down selects */
+.form-horizontal .string { padding-top: 8px!important; } /* 8px for string fields on 1st panel of pic form */
+.form-horizontal .email { padding-top: 8px!important; }
+.form-horizontal .tel { padding-top: 10px!important; }
+
+/* to make data entry form fields tall enough to contain text: Why am I having to change this?  
+	~ line 1401 and following of bootstrap.css */
+/* margin-top:4px; controls vertical alignment of checkboxes and radio-buttons */
+
+.form-horizontal input {
+	margin-top: 4px; /* why not seeing this? */
+	min-height: 12px;
+	height:16px;
+	padding-top: 5px;
+/*	min-width: 80px;  was 180px for Request Info button on 0th panel of pic form */
+}
+
+/* to align submit-button with data entry fields in form */
+
+.form-horizontal .form-actions {
+  padding-left: 40px; /* line 1511: was 160px — moves buttons to the right */
+  margin-left: 10px;  /* added to align left edge of white block containing submit button with input fields above */
+  margin-top:0px;
+  border-top:none;
+  background-color: transparent;
+}
+ /* line 1476 controls vertical spacing between form's fields */
+
+/* to make buttons on pic form larger — maybe restrict context to picform_main ...*/
+
+.btn-large {
+	line-height: 64px; /* No effect: overridden by .simple_form input */
+	padding: 32px 28px 24px 28px; /* original value: 9px 14px */
+	font-size:20px; /* originally 16px; 50% larger */
+}
+.simple_form input[type="submit"] {
+	line-height: 1em!important;
+	height:64px!important;
+	padding-top:18px;
+}
+	
+
+

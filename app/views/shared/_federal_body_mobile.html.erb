@@ -1,0 +1,90 @@
+
+
+	<div id="left_column_wrapper">
+		
+		<% unless flash[:notice].nil? %>
+			<div id="notice"><%= flash[:notice] %></div>
+		<% end %>
+		
+		<%= render "/shared/progress_bar" %>
+		
+		
+		<div id="picform_main" >
+			<h2>Federal Financial Aid</h2>
+			<%= simple_form_for @student,  url: wizard_path,  :html => { :width => '95%' } do |f| %>
+	
+				<fieldset>
+					<%= f.input :us_citizen, 
+						:label => "Are you a U.S. citizen or a national or permanent resident of the U.S?", 
+						# field of type boolean, simple-form will show it as a checkbox
+						:wrapper_html => {:id => 'us_citizen', :class => 'inline'}
+						%>
+					<%= f.input :financial_aid,
+						:label => "Are you interested in tuition assistance?",
+						#:collection => ["Yes","No"],
+						#:as => :radio_buttons,
+						:wrapper_html => {:id => 'interest_title4', :class => 'inline'}					
+						%>
+					<!-- 
+					<%= f.input :tuition_reimbursement,
+						:label => "Are you interested in tuition reimbursement?",
+						:wrapper_html => {:id => 'interest_reimbursement', :class => 'inline'}				
+						%>
+					-->								
+					<%= f.input :military_tuition_assistance,
+						:label => "Are you interested in military tuition assistance or Veterans Educational Benefits?",
+						# field of type boolean, simple-form will show it as a checkb
+						:wrapper_html => {:id => 'interest_military', :class => 'inline'}				
+						%>
+					
+					
+					<%= f.input :affiliated_with_us_military, 
+						:label => "Are you affiliated with the U.S. military?", 
+						# field of type boolean, simple-form will show it as a checkb')
+						:wrapper_html => {:id => 'affiliated', :class => 'inline'}
+						%>
+				
+					<%= f.input :type_of_military_affiliation, 
+						:label => "Type of affiliation",
+						#:as => :radio_buttons, 
+						:collection => 
+							[
+								["None",0],
+								["Veteran", 1],
+								["Active Duty",2],
+								["National Guard",3],
+								["Reserve (active)",4],
+								["Reserve (inactive)",5],
+								["Active Duty Spouse",6],
+								["Guard Spouse",7],
+								["Reserve Spouse",8]
+							],
+						
+						:wrapper_html => { :id => 'military_affiliation'} 
+						 %>
+					<%= f.input :branch_of_service, 
+						:label => "Branch of service",
+						#:as => :radio_buttons, 
+						:collection => 
+							
+							[
+								#["None",0],
+				    		  	["Army",1],
+				    		  	["Navy",2],
+				    		  	["Air Force",3],
+				    		  	["Marines",4],
+				    		  	["Coast Guard",5],
+				    		  	["Department of Defense (DOD)",6]								
+							],
+						:wrapper_html => { :id => 'branch'} 
+						 %>
+	
+				  	<div class="form-actions" id="federal_submit">
+						<!-- <## link_to "Back", previous_wizard_path, :class => 'btn' #> -->
+						<%= f.submit 'Next', :class => 'btn-warning btn-large' %>
+				  	</div>
+				</fieldset>
+	
+			<% end %>
+		</div>
+	</div>

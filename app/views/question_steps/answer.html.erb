@@ -1,0 +1,43 @@
+<h1>Enter Your Answers </h1>
+<%= render layout: 'form' do |f| %>
+  <% if f.object.answer_options.to_s == "2" %>
+    <%= f.radio_button(:ansopt2, 'yes-no', :checked => true) %> yes-no <br>
+    <%= f.radio_button(:ansopt2, 'true-false') %> true-false <br>
+    <%= f.radio_button(:ansopt2, 'custom') %> custom <br>
+    <div id="que_ans_custom" style="display:none;">
+      <%= f.label :ans_custom_1 %>
+      <%= f.text_field :ans_custom_1 %> <br>
+      <%= f.label :ans_custom_2 %>
+      <%= f.text_field :ans_custom_2 %> <br>
+
+    </div>
+  <% else %>
+    <%= f.fields_for :answers do |ans| %>
+      <%= ans.text_field :answer %>
+      <%= ans.link_to_remove "Remove Answer" %>
+    <% end %>
+    <p><%= f.link_to_add "Add Answer", :answers %></p>
+  <% end %>
+  <br>
+<% end %>
+
+<script type="text/javascript">
+$("#question_ansopt2_custom").click(function(){
+  $("#que_ans_custom").show();
+  $("#question_ans_custom_1").attr('required', true);
+  $("#question_ans_custom_2").attr('required', true);
+});
+$("#question_ansopt2_yes-no").click(function(){
+  $("#que_ans_custom").hide();
+  $("#question_ans_custom_1").attr('required', false);
+  $("#question_ans_custom_2").attr('required', false);
+  });
+
+$("#question_ansopt2_true-false").click(function(){
+  $("#que_ans_custom").hide();
+    $("#question_ans_custom_1").attr('required', false);
+  $("#question_ans_custom_2").attr('required', false);
+
+  });
+
+</script>

@@ -1,0 +1,41 @@
+<% if @providers.present? %>
+  <h3>Leads</h3>
+  <% @providers.each do |provider| %>
+    <% if provider.leads.present? %>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Username</th>
+              <th>Firstname</th>
+              <th>Email</th>
+              <th>Source URL</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Country</th>
+              <th>Visit Count</th>
+              <th>Lead Created Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% provider.leads.each do |lead| %>
+              <tr>
+                <td><%= lead.provider.name %></td>
+                <td><%= lead.username if lead.username.present? %></td>
+                <td><%= lead.firstname if lead.firstname.present? %></td>
+                <td><%= lead.email if lead.email.present? %></td>
+                <td><%= lead.source_url if lead.source_url.present? %></td>
+                <td><%= lead.city if lead.city.present? %></td>
+                <td><%= lead.state if lead.state.present? %></td>
+                <td><%= lead.country if lead.country.present? %></td>
+                <td><%= lead.visits.count %></td>
+                <td><%= lead.created_at.strftime("%b %m, %Y %h:%m")%></td>
+              </tr>
+            <% end %>    
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

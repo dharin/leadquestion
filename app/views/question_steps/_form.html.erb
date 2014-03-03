@@ -1,0 +1,18 @@
+<%= nested_form_for @question, url: wizard_path do |f| %>
+  <%= hidden_field_tag :question_id, @question.id %>
+  <% if @question.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= yield f %>
+  <div class="actions">
+    <%= f.submit "Continue" %>
+  </div>
+<% end %>
+

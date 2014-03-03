@@ -1,0 +1,17 @@
+<h1> Information </h1>
+<table>
+  <% @visitor.form_datas.each do |data| %>
+  <tr>
+    <td><%= data.question.question_name %> : </td> 
+    <td>
+      <% if data.answer.to_s == "true" %>
+        Yes
+      <% elsif data.answer.to_s == "false" %>
+        No
+      <% else %>
+        <%= data.answer %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

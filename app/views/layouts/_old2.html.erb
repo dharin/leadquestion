@@ -1,0 +1,50 @@
+
+
+<form accept-charset="UTF-8" action="/students" class="simple_form new_student" id="new_student" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓"><input name="authenticity_token" type="hidden" value="csP+D6UGCuic1HGrCbz8e9ftjTYzgg5NwnG5lRVA56Q="></div>
+            <fieldset>  
+            
+            
+            <div class="yellow">
+            
+            
+            
+            <div class="control-group select required student_highest_level_of_education" id="edu_level"><div class="controls"><select class="select required" id="student_highest_level_of_education" name="student[highest_level_of_education]"><option value="">Highest level of
+                  education so far</option>
+<option value="0">Still in High School</option>
+<option value="1">GED</option>
+<option value="2">High School Diploma</option>
+<option value="3">Some College (less than two years)</option>
+<option value="4">Some College (more than two years)</option>
+<option value="5">Associate's Degree</option>
+<option value="6">Bachelor's Degree</option>
+<option value="8">Master's Degree</option>
+<option value="9">Doctoral Degree</option></select></div></div></div>
+          
+              <!-- prepop this with a choice consistent with the user's selected hloe; show alert if he changes it to something that won't work? -->
+              <div class="yellow inactive"><div class="control-group select required student_degree_sought" id="degree_level"><div class="controls"><select class="select required" id="degrees_select" name="student[degree_sought]" disabled="disabled"><option value="">What degree is next for you?</option>
+<option value="1">Associate's</option>
+<option value="2">Bachelor's</option>
+<option value="3">Master's</option>
+<option value="4">Doctoral</option></select></div></div></div>
+
+              <!--- Area of Study ( Discipline ) —————————— -->
+              <div class="yellow inactive"><div class="control-group select required student_area_of_study" id="area_of_study"><div class="controls"><select class="select required" id="disciplines_select" name="student[area_of_study]" disabled="disabled"><option value="">Area of Study</option>
+<option value="1">Business</option>
+<option value="2">Criminal Justice</option>
+<option value="3">Education</option>
+<option value="4">Engineering &amp; Science</option>
+<option value="5">Fire &amp; Emergency Mgmt</option>
+<option value="7">Healthcare</option>
+<option value="8">Information Technology</option>
+<option value="9">Legal/Paralegal Studies</option>
+<option value="10">Liberal Arts</option>
+<option value="11">Nursing</option>
+<option value="12">Psychology &amp; Counseling</option>
+<option value="13">Social Services</option>
+<option value="14">Web/Graphic Design</option>
+<option value="15">Theology</option></select></div></div></div>
+          
+            <input class="btn btn-warning btn-mine green-button" name="commit" type="submit" value="         Start Search         ">
+            <!-- this will go to Student#create -->
+            </fieldset>
+          </form> <!-- end simple_form do block -->

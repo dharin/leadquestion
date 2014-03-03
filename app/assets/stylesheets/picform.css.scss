@@ -1,0 +1,226 @@
+.nada { color:red;}
+
+@import "color_scheme";
+
+/* ———— 'panel-0' ——————————————————————————————————————————————— */
+#picform_panel_0 {
+  margin-top: -9px;
+  width: 270px; /* = BOOTSTRAP .span4 (300)  */
+  padding: 30px 0px 30px 30px; /* so if trying to fit within 300, px span 4, have 270 to play with */
+	/* 39px bottom padding makes this span4 the same height as picture in span8 to its left */
+  background-color: $form-background-color;
+  color: $form-text-color; 
+  box-shadow: 10px 10px 5px #888888;
+  border: 10px solid $form-border-color;
+  /* if want background semi-transparent so can float the form over other content */
+  opacity: 0.8;
+  filter:alpha(opacity=80); /* For IE8 and earlier */
+}
+#picform_panel_0 .simple_form input[type="submit"] {
+	height: 40px !important;
+	padding-top: 4px!important;
+	width: 180px;
+}
+
+
+/* not used here; it is for full site where menu slides down the page as user's focus moves down */
+#picform.fixed {
+  position: fixed;
+  top: 0;
+  width:320px; /* otherwise it expands to the right to full margin of the window 
+	however a width declaration of 320px, gives a blue form of 340px: 10px/side padding: see picform above */
+}
+
+
+/* ———— panels 1 thru n ——————————————————————————————————————————————— */
+
+#picform_main {
+	position: relative;
+	top:0px; 
+	left:0px;
+	width:480px; /* span7 in bootstrap + 20 right padding */ 
+	padding: 20px; /* so if trying to fit within xxx px span , have xxx px to use */
+	/* colors used at various times:
+		FF7A00 bright orange
+		FCF8E# pale orange/tan
+		FF00FF bright purple
+		FFCCFF purplish pink 
+		*/
+	background-color:$form-background-color;
+	color: $form-text-color;
+	box-shadow: 10px 10px 5px gray;
+	border: 10px solid $form-border-color; 
+
+	
+}
+#picform_main .control-label {  
+	width:200px;	/* supposed to be a default, overridden by specific panels (e.g line 165 below), but it is overriding the 240px declaration for picform_study_panel in views/devry_steps/study.html.erb.  Why? Remove it from here and specify in each panel instead? */	
+	}
+
+#picform_main .controls {
+	/* specify on each panel instead */						
+}
+	
+/* wrapper is not used in single page landing form where pic form does not scroll down as user scrolls down the page */
+#picformWrapper { /* required to avoid jumping */
+  left: 0px; /* was 620px = span8 */
+  position: relative; /* was absolute */
+  margin-left: 560px; /* .span7 (540) + 20 */
+  width:360px;/* .span5 (380) - 20 for margin to the left of column*/
+}
+
+/* ————— unclear what version of the pic form this applies to: how different that picform_main? ———— */
+
+#picform {
+  position: relative;
+  top:0px; left:0px;
+  width: 340px; /* = BOOTSTRAP .span5 (380)  -20px */
+  padding: 20px 0px 20px 20px; /* so if trying to fit within 300, px span 4, have 260 to play with */
+  background-color:$form-background-color;
+  color:$form-text-color;
+  box-shadow: 10px 10px 5px #888888;
+  border: 10px solid $form-border-color;
+  /* if want background semi-transparent so can float the form over other content */
+  opacity:1.0;
+  filter:alpha(opacity=60); /* For IE8 and earlier */
+}
+
+
+p.help-block { font-size:11px!important; font-style:italic; }
+
+#picform h2 {
+  font-family: Helvetica;
+  font-size: 22px;
+  margin-left: 30px; /* controls position of panel headings in picform */
+}
+#picform h3 {
+  font-family: Helvetica;
+  font-size: 16px;
+  margin-bottom:20px;
+}
+.opt_in p { font-size:12px; color:#FFF; padding-top:12px; padding-left:10px;padding-right:10px;}
+.opt_in a { color:white;}
+
+
+.simple_form input[type='submit'] { 
+	margin-left: 0px; /* works on panel-0; adjust it for panel-1, ... panel-n */
+	margin-top: 0px;
+	/* width: 80px;*/
+	min-height: 30px;
+	line-height: 0.5em;
+	/* background-color: orange; */
+	color:white;
+	}
+/* repeated here because does not seem to be working in bootstrap_customize_v2 where it belongs. */
+.form-horizontal input { 
+	margin-top: 5px; /* why not seeing this ? controls alignment of checkbox and radio buttons */
+	min-height: 12px;
+	padding-top: 5px;
+}
+
+/* ————— federal panel —————————————————————————————————————— */
+
+h1 { margin-bottom:40px; }
+#military_affiliation { display:none;}
+
+
+/*  To move data entry fields right on the panel so have more room for long label */
+.picform_federal_panel .control-label { width: 240px!important; } /* vs 200 regularly */
+.picform_federal_panel .controls { padding-left:200px!important; }
+/* to align right edge of 'Back'/Continue' buttons with right edge of control labels */
+.form-horizontal .form_actions {width:80px;} /* was 160px */
+/* 	To override this, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */	
+.simple_form #federal_submit { margin-left:160px;}
+
+
+/* ————— education panel ————————————————————————————————————— */
+/*  To move data entry fields right on the panel so have more room for long label */
+.picform_education_panel .control-label { width: 240px!important; } /* vs 200 regularly */
+.picform_education_panel .controls { padding-left:200px!important; }
+/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+.simple_form #education_submit { margin-left:160px;}
+
+
+/* ————— campus panel ———————————————————————————————————————— */
+/*  To move data entry fields right on the panel so have more room for long label */
+.picform_campus_panel .control-label { width: 240px!important; } /* vs 200 regularly */
+.picform_campus_panel .controls { padding-left:200px!important; }
+/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+.simple_form #campus_submit { margin-left:160px;}
+
+/* ————— work panel —————————————————————————————————————————— */
+/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+.simple_form #work_submit { margin-left:160px;}
+
+/* ————— study panel ————————————————————————————————————————— */
+
+h1 { margin-bottom:40px; }
+div.school_logo {float:left; height:120px; overflow:hidden; padding-left:20px; }
+div.school_blerb {height:120px; overflow:hidden; padding-left:20px; padding-right:20px; margin-left:20px;}
+p.picform_padleft { padding-left:30px; padding-top:10px;}
+
+/* to center-align the questions better within the form panel */
+.picform_study_panel .controls { padding-left:200px!important; }
+.picform_study_panel .control-label { width:240px!important; }
+
+/*  To align right edge of 'Back'/'Continue' with right edge of control labels */
+.form-horizontal .form-actions { padding-left:90px;}
+/*  To override this when using a single 'Next' button rather than two buttons.  
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+.simple_form #study_submit { margin-left:160px;}
+
+/* ————— nursing panel ——————————————————————————————————————— */
+/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+	/* .simple_form #nursing_submit { margin-left:160px;} */
+	/*  To move data entry fields right on the panel so have more room for long label */
+	.picform_nursing_panel .control-label { width: 240px!important; } /* vs 200 regularly */
+	.picform_nursing_panel .controls { padding-left:200px!important; }
+	/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+		Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+	.simple_form #nursing_submit { margin-left:160px;}
+
+/* ————— address panel ——————————————————————————————————————— */
+
+div#picform { padding-right:20px; }
+/* to center-align the questions better within the form panel */
+div.picform_address_panel .control-label { width: 180px!important;}
+div.picform_address_panel .controls { padding-left:140px!important;}
+div.picform_address_panel .form-actions { padding-left:40px!important;}
+/* To align 'Back'/'Continue' buttons with questions above them */
+.simple_form #address_submit { margin-left:150px;}  /* all but this and contact panel use 160px; make that the default? */
+/* to override this and move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+
+
+
+/* ————— contact panel —————————————————————————————————————— */
+
+div.picform_contact_panel .control-label { width: 180px!important;}
+div.picform_contact_panel .controls { padding-left:140px!important;}
+div.picform_contact_panel .form-actions { padding-left:55px!important;}
+/* 	To override positioning defined for Back/Continue buttons, when using just a single 'Next' button.
+	Move 'Next' button to the right, so that its left-edge lines up with the left-edge of the data entry fields */
+.simple_form #contact_submit { margin-left:135px;}  
+
+div#btc { padding-top:17px!important;} 
+select#student_best_time_to_call {width:184px!important;}
+
+div#disclaimer, div#kaplan_disclaimer { font-size:11px; font-style:italic;
+	padding-left:65px; padding-right:20px;}
+
+
+
+
+
+
+
+
+
+
+
+
+	
